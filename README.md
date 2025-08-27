@@ -1,82 +1,77 @@
-# NxAdminStarter
+NxAdminStarter
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Full-stack starter for B2B admin apps using Nx, Angular, NestJS, Prisma, and Postgres.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+⸻
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+Workflow
 
-## Finish your CI setup
+1. Clone & install
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/zPWRDx4S5b)
+git clone <repo-url>
+cd admin-starter
+pnpm install
 
+2. Start database
 
-## Run tasks
+docker compose up -d admin-starter-db
 
-To run the dev server for your app, use:
+Database runs on localhost:5432 with credentials from .env.
 
-```sh
-npx nx serve admin-starter-web
-```
+3. Prisma (generate, migrate, seed)
 
-To create a production bundle:
+pnpm prisma:generate
+pnpm prisma:migrate
 
-```sh
-npx nx build admin-starter-web
-```
+Default login: admin@example.com / admin123
 
-To see all available targets to run for a project, run:
+4. Run apps
 
-```sh
-npx nx show project admin-starter-web
-```
+pnpm dev # runs API and Web together
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+    •	API → http://localhost:3333/api
+    •	Web → http://localhost:4200
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+5. Build & test
 
-## Add new projects
+pnpm build
+pnpm test
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+⸻
 
-Use the plugin's generator to create new projects.
+Features
+• 🔐 JWT Auth (access & refresh tokens)
+• 👥 Role-based access control (Admin/Manager/Viewer)
+• 👤 User management CRUD
+• 💳 Stripe billing stubs
+• ✉️ Email via SMTP (Mailhog for dev)
+• 📊 Angular admin dashboard
+• 📦 Nx monorepo with libs for clean separation
+• 🚀 Docker & GitHub Actions CI ready
 
-To generate a new application, use:
+⸻
 
-```sh
-npx nx g @nx/angular:app demo
-```
+Project structure
 
-To generate a new library, use:
+apps/ # thin shells for api + web
+libs/api/_ # NestJS feature modules (auth, users, billing...)
+libs/web/_ # Angular feature modules (dashboard, users...)
+prisma/ # schema & seed
 
-```sh
-npx nx g @nx/angular:lib mylib
-```
+⸻
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+Quick start
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+# one-liner
 
+pnpm install && docker compose up -d admin-db && pnpm prisma:migrate && pnpm dev
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Login → http://localhost:4200 with admin@example.com / admin123
 
-## Install Nx Console
+⸻
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Next steps
+• Add more Angular feature libs for your product entities.
+• Implement Stripe webhook handling.
+• Add audit logging and reporting.
+• Deploy via Dockerfiles (Dockerfile.api / Dockerfile.web).
