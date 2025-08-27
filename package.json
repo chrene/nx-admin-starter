@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "nx": "NODE_OPTIONS=--max_old_space_size=8192 nx",
-    "start": "pnpm nx start $1"
+    "start": "pnpm nx serve $1"
   },
   "private": true,
   "dependencies": {
