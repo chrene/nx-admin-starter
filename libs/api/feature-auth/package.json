@@ -1,5 +1,5 @@
 {
-  "name": "@admin-starter/api-auth",
+  "name": "@admin-starter/api-feature-auth",
   "version": "0.0.1",
   "private": true,
   "type": "commonjs",

@@ -1,0 +1,20 @@
+{
+  "name": "api-feature-auth",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/feature-auth/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/api/feature-auth",
+        "tsConfig": "libs/api/feature-auth/tsconfig.lib.json",
+        "packageJson": "libs/api/feature-auth/package.json",
+        "main": "libs/api/feature-auth/src/index.ts",
+        "assets": ["libs/api/feature-auth/*.md"]
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ApiAuthModule } from '@admin-starter/api-auth';
+import { ApiFeatureAuthModule } from '@admin-starter/api-feature-auth';
 
 @Module({
-  imports: [ApiAuthModule],
+  imports: [ApiFeatureAuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
