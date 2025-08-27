@@ -57,7 +57,11 @@
           "buildTarget": "admin-starter-web:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "dependsOn": ["admin-starter-api:serve"],
+      "options": {
+        "proxyConfig": "apps/admin-starter-web/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular/build:extract-i18n",
