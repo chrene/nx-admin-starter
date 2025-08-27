@@ -5,6 +5,9 @@
   "scripts": {
     "nx": "NODE_OPTIONS=--max_old_space_size=8192 nx",
     "start": "pnpm nx serve $1",
+    "lint:all": "nx run-many --target=lint --all",
+    "lint:all:fix": "pnpm lint:all --fix",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
     "prisma:generate": "prisma generate --schema prisma/schema.prisma",
     "prisma:migrate": "prisma migrate dev --schema prisma/schema.prisma && tsx prisma/seed.ts"
   },
