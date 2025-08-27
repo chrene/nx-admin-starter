@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@admin-starter/api-feature-auth": ["libs/api/feature-auth/src/index.ts"]
+      "@admin-starter/api-feature-auth": ["libs/api/feature-auth/src/index.ts"],
+      "@admin-starter/api-core-prisma": ["libs/api/core/prisma/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

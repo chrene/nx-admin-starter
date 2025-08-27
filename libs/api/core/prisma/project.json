@@ -1,0 +1,20 @@
+{
+  "name": "api-core-prisma",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/core/prisma/src",
+  "projectType": "library",
+  "tags": ["type:feature", "scope:core"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/api/core/prisma",
+        "tsConfig": "libs/api/core/prisma/tsconfig.lib.json",
+        "packageJson": "libs/api/core/prisma/package.json",
+        "main": "libs/api/core/prisma/src/index.ts",
+        "assets": ["libs/api/core/prisma/*.md"]
+      }
+    }
+  }
+}
