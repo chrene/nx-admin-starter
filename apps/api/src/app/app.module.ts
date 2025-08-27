@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ApiFeatureAuthModule } from '@api/feature-auth';
+import { ApiAuthModule } from '@api/auth';
 import { ConfigModule } from '@nestjs/config';
 import { CorePrismaModule } from '@api/core/prisma';
 
@@ -9,7 +9,7 @@ import { CorePrismaModule } from '@api/core/prisma';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     CorePrismaModule,
-    ApiFeatureAuthModule,
+    ApiAuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

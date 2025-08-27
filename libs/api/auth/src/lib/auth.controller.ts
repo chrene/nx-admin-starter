@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
-import { ApiFeatureAuthService } from './auth.service';
+import { ApiAuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { JwtAccessGuard } from './guards/jwt-access.guard';
 import { User } from './decorators/user.decorator';
@@ -7,8 +7,8 @@ import { Roles } from './decorators/roles.decorator';
 import { Role } from '@prisma/client';
 
 @Controller('auth')
-export class ApiFeatureAuthController {
-  constructor(private auth: ApiFeatureAuthService) {}
+export class ApiAuthController {
+  constructor(private auth: ApiAuthService) {}
 
   @Post('login')
   async login(@Body() body: LoginDto) {

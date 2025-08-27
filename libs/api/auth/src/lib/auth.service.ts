@@ -4,7 +4,7 @@ import { PrismaClient, Role } from '@prisma/client';
 import * as argon2 from 'argon2';
 
 @Injectable()
-export class ApiFeatureAuthService {
+export class ApiAuthService {
   constructor(private jwt: JwtService, private prisma: PrismaClient) {}
 
   async validate(email: string, password: string) {
