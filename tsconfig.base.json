@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@api/*": ["libs/api/*/src/index.ts", "libs/api/*/src/lib/index.ts"]
+      "@api/*": ["libs/api/*/src/index.ts", "libs/api/*/src/lib/index.ts"],
+      "@nx-admin-starter/web-auth-data-access": [
+        "libs/web/auth/data-access/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
