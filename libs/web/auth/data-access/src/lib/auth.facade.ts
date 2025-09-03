@@ -1,4 +1,3 @@
-// libs/web/data-access-auth/src/lib/auth.facade.ts
 import { Injectable, inject } from '@angular/core';
 import { AuthStore } from './auth.store';
 

@@ -12,6 +12,11 @@ export const routes: Routes = [
         pathMatch: 'full',
         redirectTo: '',
       },
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('@web/auth/feature/login').then((m) => m.WebAuthFeatureLogin),
+      },
     ],
   },
 ];

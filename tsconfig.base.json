@@ -16,14 +16,17 @@
     "baseUrl": ".",
     "paths": {
       "@api/*": ["libs/api/*/src/index.ts", "libs/api/*/src/lib/index.ts"],
-      "@web/*": ["libs/web/*/src/index.ts", "libs/web/*/src/lib/index.ts"],
       "@nx-admin-starter/web-auth-data-access": [
         "libs/web/auth/data-access/src/index.ts"
       ],
       "@nx-admin-starter/web-auth-feature-shell": [
         "libs/web/auth/feature/shell/src/index.ts"
       ],
-      "@web/feature-shell": ["libs/web/shell/src/index.ts"]
+      "@web/*": ["libs/web/*/src/index.ts", "libs/web/*/src/lib/index.ts"],
+      "@web/feature-shell": ["libs/web/shell/src/index.ts"],
+      "@web/web-auth-feature-login": [
+        "libs/web/auth/feature/login/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

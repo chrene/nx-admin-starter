@@ -1,6 +1,11 @@
 {
   "name": "@nx-admin-starter/web-auth-feature-shell",
   "version": "0.0.1",
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@angular/common": "~20.1.0",
+    "@angular/core": "~20.1.0",
+    "@angular/router": "~20.1.0",
+    "@web/web-auth-feature-login": "0.0.1"
+  },
   "sideEffects": false
 }

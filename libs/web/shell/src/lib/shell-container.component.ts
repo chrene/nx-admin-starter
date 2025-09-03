@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [CommonModule],
-  template: `<div></div> `,
+  imports: [CommonModule, RouterOutlet],
+  template: `<router-outlet></router-outlet>`,
 })
 export class WebFeatureShellContainerComponent {}
