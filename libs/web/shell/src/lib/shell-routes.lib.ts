@@ -3,8 +3,6 @@ import { authGuard } from '@web/auth/data-access';
 
 import { WebFeatureShellContainerComponent } from './shell-container.component';
 
-const isAuthEnabled = true;
-
 export const routes: Routes = [
   {
     path: 'auth',
@@ -20,7 +18,7 @@ export const routes: Routes = [
         redirectTo: '',
       },
     ],
-    canActivate: isAuthEnabled ? [authGuard] : [],
+    canActivate: [authGuard],
   },
   {
     path: 'reset-password',

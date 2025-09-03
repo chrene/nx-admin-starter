@@ -6,6 +6,7 @@ import { PasswordModule } from 'primeng/password';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AuthFacade } from '@web/auth/data-access';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'lib-web-auth-feature-login',
@@ -134,8 +135,14 @@ export class WebAuthFeatureLogin {
   password = '';
   checked = false;
   private readonly authFacade = inject(AuthFacade);
+  private readonly router = inject(Router);
 
   onLogin() {
     this.authFacade.login(this.email, this.password);
+    this.authFacade.isAuthed$.subscribe((isAuthed) => {
+      if (isAuthed) {
+        this.router.navigate(['/']);
+      }
+    });
   }
 }

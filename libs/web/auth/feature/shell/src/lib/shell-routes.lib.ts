@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { AuthFeatureShellContainerComponent } from './shell-container.component';
+import { redirectIfAuthenticated } from '@nx-admin-starter/web-auth-data-access';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,7 @@ export const routes: Routes = [
         path: 'login',
         loadComponent: () =>
           import('@web/auth/feature/login').then((m) => m.WebAuthFeatureLogin),
+        canActivate: [redirectIfAuthenticated],
       },
     ],
   },
