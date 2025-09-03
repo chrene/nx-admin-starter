@@ -7,6 +7,7 @@ import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AuthFacade } from '@web/auth/data-access';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'lib-web-auth-feature-login',
@@ -139,10 +140,8 @@ export class WebAuthFeatureLogin {
 
   onLogin() {
     this.authFacade.login(this.email, this.password);
-    this.authFacade.isAuthed$.subscribe((isAuthed) => {
-      if (isAuthed) {
-        this.router.navigate(['/']);
-      }
+    this.authFacade.isAuthed$.pipe(take(1)).subscribe((isAuthed) => {
+      if (isAuthed) this.router.navigate(['/']);
     });
   }
 }
