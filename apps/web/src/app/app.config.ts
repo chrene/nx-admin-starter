@@ -1,4 +1,8 @@
-import { provideHttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
@@ -9,6 +13,7 @@ import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import AppPreset from './app-preset';
 import { appRoutes } from './app.routes';
+import { authInterceptor } from '@web/auth/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +25,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideRouter(appRoutes),
   ],
 };

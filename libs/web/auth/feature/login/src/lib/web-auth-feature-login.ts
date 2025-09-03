@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
+import { AuthFacade } from '@web/auth/data-access';
 
 @Component({
   selector: 'lib-web-auth-feature-login',
@@ -118,7 +119,7 @@ import { CheckboxModule } from 'primeng/checkbox';
               <p-button
                 label="Sign In"
                 class="w-full"
-                routerLink="/"
+                (click)="onLogin()"
               ></p-button>
             </div>
           </div>
@@ -132,12 +133,9 @@ export class WebAuthFeatureLogin {
   email = '';
   password = '';
   checked = false;
+  private readonly authFacade = inject(AuthFacade);
 
   onLogin() {
-    console.log('Login attempt', {
-      email: this.email,
-      password: this.password,
-    });
-    // Add real auth call here
+    this.authFacade.login(this.email, this.password);
   }
 }
