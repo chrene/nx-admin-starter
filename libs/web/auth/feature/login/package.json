@@ -1,8 +1,13 @@
 {
-  "name": "@web/web-auth-feature-login",
+  "name": "@nx-admin-starter/web-auth-feature-login",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/core": "^20.1.0"
+    "@angular/core": "^20.1.0",
+    "@angular/forms": "~20.1.0",
+    "primeng": "^20.1.1",
+    "@nx-admin-starter/web-auth-data-access": "0.0.1",
+    "@angular/router": "~20.1.0",
+    "rxjs": "~7.8.0"
   },
   "sideEffects": false
 }

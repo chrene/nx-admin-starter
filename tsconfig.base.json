@@ -23,10 +23,10 @@
         "libs/web/auth/feature/shell/src/index.ts"
       ],
       "@nx-admin-starter/web-shell-feature": [
-        "libs/dashboard/shell/feature/src/index.ts"
+        "libs/web/shell/feature/src/index.ts"
       ],
       "@web/*": ["libs/web/*/src/index.ts", "libs/web/*/src/lib/index.ts"],
-      "@web/web-auth-feature-login": [
+      "@nx-admin-starter/web-auth-feature-login": [
         "libs/web/auth/feature/login/src/index.ts"
       ]
     }

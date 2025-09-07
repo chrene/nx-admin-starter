@@ -2,7 +2,7 @@ export default {
   displayName: 'web-shell-feature',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/dashboard/shell/feature',
+  coverageDirectory: '../../../../coverage/libs/web/shell/feature',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
