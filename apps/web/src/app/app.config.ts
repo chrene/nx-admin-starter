@@ -13,7 +13,7 @@ import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import AppPreset from './app-preset';
 import { appRoutes } from './app.routes';
-import { authInterceptor } from '@web/auth/data-access';
+import { authInterceptor } from '@nx-admin-starter/web-auth-data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [

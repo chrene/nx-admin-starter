@@ -16,7 +16,9 @@ export const routes: Routes = [
       {
         path: 'login',
         loadComponent: () =>
-          import('@web/auth/feature/login').then((m) => m.WebAuthFeatureLogin),
+          import('@nx-admin-starter/web-auth-feature-login').then(
+            (m) => m.WebAuthFeatureLogin
+          ),
         canActivate: [redirectIfAuthenticated],
       },
     ],

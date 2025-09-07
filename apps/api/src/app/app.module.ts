@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ApiAuthModule } from '@api/auth';
+import { ApiAuthModule } from '@nx-admin-starter/api-auth';
 import { ConfigModule } from '@nestjs/config';
-import { CorePrismaModule } from '@api/core/prisma';
+import { CorePrismaModule } from '@nx-admin-starter/api-core-prisma';
 
 @Module({
   imports: [

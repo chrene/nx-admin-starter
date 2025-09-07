@@ -5,12 +5,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
-import { AuthFacade } from '@web/auth/data-access';
+import { AuthFacade } from '@nx-admin-starter/web-auth-data-access';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'lib-web-auth-feature-login',
+  selector: 'web-auth-feature-login',
   standalone: true,
   imports: [
     FormsModule,

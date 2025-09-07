@@ -3,6 +3,7 @@ import { Route } from '@angular/router';
 export const appRoutes: Route[] = [
   {
     path: '',
-    loadChildren: () => import('@web/shell/feature').then((m) => m.routes),
+    loadChildren: () =>
+      import('@nx-admin-starter/web-auth-feature-shell').then((m) => m.routes),
   },
 ];
