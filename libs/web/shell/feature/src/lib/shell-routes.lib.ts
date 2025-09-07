@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '@nx-admin-starter/web-auth-data-access';
-
-import { WebFeatureShellContainerComponent } from './shell-container.component';
+import { WebShellLayoutComponent } from '@nx-admin-starter/web-shell-ui';
 
 export const routes: Routes = [
   {
@@ -11,18 +10,18 @@ export const routes: Routes = [
   },
   {
     path: '',
-    component: WebFeatureShellContainerComponent,
+    component: WebShellLayoutComponent,
+    canActivate: [authGuard],
     children: [
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: '',
+        path: 'dashboard',
+        loadComponent: () =>
+          import('@nx-admin-starter/web-dashboard-feature').then(
+            (m) => m.WebDashboardFeature
+          ),
       },
     ],
-    canActivate: [authGuard],
   },
-  {
-    path: 'reset-password',
-    redirectTo: 'auth/reset-password',
-  },
+  { path: 'reset-password', redirectTo: 'auth/reset-password' },
 ];

@@ -4,6 +4,6 @@ export const appRoutes: Route[] = [
   {
     path: '',
     loadChildren: () =>
-      import('@nx-admin-starter/web-auth-feature-shell').then((m) => m.routes),
+      import('@nx-admin-starter/web-shell-feature').then((m) => m.routes),
   },
 ];

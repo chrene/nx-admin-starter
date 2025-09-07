@@ -1,0 +1,10 @@
+{
+  "name": "@nx-admin-starter/web-shell-ui",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^20.1.0",
+    "@angular/core": "^20.1.0",
+    "@angular/router": "~20.1.0"
+  },
+  "sideEffects": false
+}
