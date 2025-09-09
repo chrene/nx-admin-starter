@@ -31,10 +31,16 @@
       "@nx-admin-starter/web-dashboard-feature": [
         "libs/web/dashboard/feature/src/index.ts"
       ],
+      "@nx-admin-starter/web-settings-feature": [
+        "libs/web/settings/feature/src/index.ts"
+      ],
       "@nx-admin-starter/web-shell-feature": [
         "libs/web/shell/feature/src/index.ts"
       ],
-      "@nx-admin-starter/web-shell-ui": ["libs/web/shell/ui/src/index.ts"]
+      "@nx-admin-starter/web-shell-ui": ["libs/web/shell/ui/src/index.ts"],
+      "@nx-admin-starter/web-users-feature": [
+        "libs/web/users/feature/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

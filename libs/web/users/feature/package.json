@@ -1,0 +1,12 @@
+{
+  "name": "@nx-admin-starter/web-users-feature",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/core": "^20.1.0",
+    "@angular/common": "~20.1.0",
+    "@angular/router": "~20.1.0",
+    "primeng": "^20.1.1",
+    "rxjs": "~7.8.0"
+  },
+  "sideEffects": false
+}

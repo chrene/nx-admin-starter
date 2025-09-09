@@ -21,6 +21,20 @@ export const routes: Routes = [
             (m) => m.WebDashboardFeature
           ),
       },
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('@nx-admin-starter/web-users-feature').then(
+            (m) => m.webUsersFeatureRoutes
+          ),
+      },
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import('@nx-admin-starter/web-settings-feature').then(
+            (m) => m.webSettingsFeatureRoutes
+          ),
+      },
     ],
   },
   { path: 'reset-password', redirectTo: 'auth/reset-password' },
