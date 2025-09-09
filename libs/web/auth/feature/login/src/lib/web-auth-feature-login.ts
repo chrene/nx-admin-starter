@@ -7,7 +7,7 @@ import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AuthFacade } from '@nx-admin-starter/web-auth-data-access';
 import { Router } from '@angular/router';
-import { take } from 'rxjs';
+import { take, filter } from 'rxjs';
 
 @Component({
   selector: 'web-auth-feature-login',
@@ -140,8 +140,14 @@ export class WebAuthFeatureLogin {
 
   onLogin() {
     this.authFacade.login(this.email, this.password);
-    this.authFacade.isAuthed$.pipe(take(1)).subscribe((isAuthed) => {
-      if (isAuthed) this.router.navigate(['/']);
-    });
+    // Listen for successful authentication and redirect
+    this.authFacade.user$
+      .pipe(
+        filter((user) => user !== null),
+        take(1)
+      )
+      .subscribe(() => {
+        this.router.navigate(['/']);
+      });
   }
 }

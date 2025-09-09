@@ -11,10 +11,18 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: '',
+        redirectTo: 'login',
       },
       {
         path: 'login',
+        loadComponent: () =>
+          import('@nx-admin-starter/web-auth-feature-login').then(
+            (m) => m.WebAuthFeatureLogin
+          ),
+        canActivate: [redirectIfAuthenticated],
+      },
+      {
+        path: 'reset-password',
         loadComponent: () =>
           import('@nx-admin-starter/web-auth-feature-login').then(
             (m) => m.WebAuthFeatureLogin
