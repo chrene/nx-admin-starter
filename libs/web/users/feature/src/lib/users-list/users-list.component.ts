@@ -122,7 +122,7 @@ import { ToastModule } from 'primeng/toast';
 export class UsersListComponent implements OnInit {
   private usersService = inject(UsersService);
   private messageService = inject(MessageService);
-  
+
   loading = false;
   users: User[] = [];
 
@@ -142,10 +142,10 @@ export class UsersListComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Failed to load users'
+          detail: 'Failed to load users',
         });
         this.loading = false;
-      }
+      },
     });
   }
 
@@ -173,7 +173,7 @@ export class UsersListComponent implements OnInit {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: 'User deleted successfully'
+            detail: 'User deleted successfully',
           });
           this.loadUsers();
         },
@@ -182,9 +182,9 @@ export class UsersListComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Failed to delete user'
+            detail: 'Failed to delete user',
           });
-        }
+        },
       });
     }
   }

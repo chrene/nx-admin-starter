@@ -152,7 +152,7 @@ export class UserCreateComponent {
   private usersService = inject(UsersService);
   private messageService = inject(MessageService);
   private router = inject(Router);
-  
+
   userForm: FormGroup;
   loading = false;
 
@@ -174,13 +174,13 @@ export class UserCreateComponent {
     if (this.userForm.valid) {
       this.loading = true;
       const userData = this.userForm.value;
-      
+
       this.usersService.createUser(userData).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: 'User created successfully'
+            detail: 'User created successfully',
           });
           // Navigate back to users list after a short delay
           setTimeout(() => {
@@ -192,10 +192,10 @@ export class UserCreateComponent {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: error.error?.message || 'Failed to create user'
+            detail: error.error?.message || 'Failed to create user',
           });
           this.loading = false;
-        }
+        },
       });
     }
   }
