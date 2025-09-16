@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,
@@ -11,8 +11,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ButtonModule } from 'primeng/button';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { MessageModule } from 'primeng/message';
+import { UsersService } from '@nx-admin-starter/web-users-data-access';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-user-create',
@@ -27,8 +30,10 @@ import { MessageModule } from 'primeng/message';
     ButtonModule,
     RouterModule,
     MessageModule,
+    ToastModule,
   ],
   template: `
+    <p-toast></p-toast>
     <div class="max-w-2xl mx-auto space-y-6">
       <!-- Header -->
       <div>
@@ -140,8 +145,14 @@ import { MessageModule } from 'primeng/message';
       </p-card>
     </div>
   `,
+  providers: [MessageService],
 })
 export class UserCreateComponent {
+  private fb = inject(FormBuilder);
+  private usersService = inject(UsersService);
+  private messageService = inject(MessageService);
+  private router = inject(Router);
+  
   userForm: FormGroup;
   loading = false;
 
@@ -151,7 +162,7 @@ export class UserCreateComponent {
     { label: 'Viewer', value: 'VIEWER' },
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor() {
     this.userForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -162,14 +173,30 @@ export class UserCreateComponent {
   onSubmit() {
     if (this.userForm.valid) {
       this.loading = true;
-      // TODO: Implement user creation
-      console.log('Creating user:', this.userForm.value);
-
-      // Simulate API call
-      setTimeout(() => {
-        this.loading = false;
-        // Navigate back to users list
-      }, 2000);
+      const userData = this.userForm.value;
+      
+      this.usersService.createUser(userData).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'User created successfully'
+          });
+          // Navigate back to users list after a short delay
+          setTimeout(() => {
+            this.router.navigate(['/users']);
+          }, 1500);
+        },
+        error: (error) => {
+          console.error('Error creating user:', error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: error.error?.message || 'Failed to create user'
+          });
+          this.loading = false;
+        }
+      });
     }
   }
 }

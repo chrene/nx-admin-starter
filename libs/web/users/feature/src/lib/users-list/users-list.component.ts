@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -6,14 +6,9 @@ import { TagModule } from 'primeng/tag';
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
 import { RouterModule } from '@angular/router';
-
-interface User {
-  id: string;
-  email: string;
-  role: 'ADMIN' | 'MANAGER' | 'VIEWER';
-  createdAt: string;
-  lastLogin?: string;
-}
+import { UsersService, User } from '@nx-admin-starter/web-users-data-access';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-users-list',
@@ -26,8 +21,10 @@ interface User {
     CardModule,
     ToolbarModule,
     RouterModule,
+    ToastModule,
   ],
   template: `
+    <p-toast></p-toast>
     <div class="space-y-6">
       <!-- Header -->
       <div class="flex justify-between items-center">
@@ -120,31 +117,37 @@ interface User {
       </p-card>
     </div>
   `,
+  providers: [MessageService],
 })
-export class UsersListComponent {
+export class UsersListComponent implements OnInit {
+  private usersService = inject(UsersService);
+  private messageService = inject(MessageService);
+  
   loading = false;
-  users: User[] = [
-    {
-      id: '1',
-      email: 'admin@example.com',
-      role: 'ADMIN',
-      createdAt: '2024-01-01T00:00:00Z',
-      lastLogin: '2024-01-15T10:30:00Z',
-    },
-    {
-      id: '2',
-      email: 'manager@example.com',
-      role: 'MANAGER',
-      createdAt: '2024-01-02T00:00:00Z',
-      lastLogin: '2024-01-14T15:45:00Z',
-    },
-    {
-      id: '3',
-      email: 'viewer@example.com',
-      role: 'VIEWER',
-      createdAt: '2024-01-03T00:00:00Z',
-    },
-  ];
+  users: User[] = [];
+
+  ngOnInit() {
+    this.loadUsers();
+  }
+
+  loadUsers() {
+    this.loading = true;
+    this.usersService.getUsers().subscribe({
+      next: (users) => {
+        this.users = users;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading users:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to load users'
+        });
+        this.loading = false;
+      }
+    });
+  }
 
   getRoleSeverity(role: string): string {
     switch (role) {
@@ -160,15 +163,29 @@ export class UsersListComponent {
   }
 
   refreshUsers() {
-    this.loading = true;
-    // Simulate API call
-    setTimeout(() => {
-      this.loading = false;
-    }, 1000);
+    this.loadUsers();
   }
 
   deleteUser(user: User) {
-    // TODO: Implement delete functionality
-    console.log('Delete user:', user);
+    if (confirm(`Are you sure you want to delete user ${user.email}?`)) {
+      this.usersService.deleteUser(user.id).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'User deleted successfully'
+          });
+          this.loadUsers();
+        },
+        error: (error) => {
+          console.error('Error deleting user:', error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Failed to delete user'
+          });
+        }
+      });
+    }
   }
 }
