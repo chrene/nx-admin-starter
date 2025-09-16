@@ -19,6 +19,7 @@
       "@nx-admin-starter/api-core-prisma": [
         "libs/api/core/prisma/src/index.ts"
       ],
+      "@nx-admin-starter/api-users": ["libs/api/users/src/index.ts"],
       "@nx-admin-starter/web-auth-data-access": [
         "libs/web/auth/data-access/src/index.ts"
       ],

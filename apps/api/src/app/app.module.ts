@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ApiAuthModule } from '@nx-admin-starter/api-auth';
+import { UsersModule } from '@nx-admin-starter/api-users';
 import { ConfigModule } from '@nestjs/config';
 import { CorePrismaModule } from '@nx-admin-starter/api-core-prisma';
 
@@ -8,6 +9,7 @@ import { CorePrismaModule } from '@nx-admin-starter/api-core-prisma';
     ConfigModule.forRoot({ isGlobal: true }),
     CorePrismaModule,
     ApiAuthModule,
+    UsersModule,
   ],
 })
 export class AppModule {}

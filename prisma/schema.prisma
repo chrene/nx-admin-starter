@@ -11,11 +11,12 @@ model User {
     id           String   @id @default(cuid())
     email        String   @unique
     passwordHash String
-    role         Role     @default(ADMIN)
+    role         Role     @default(VIEWER)
     createdAt    DateTime @default(now())
 }
 
 enum Role {
     ADMIN
-    USER
+    MANAGER
+    VIEWER
 }
