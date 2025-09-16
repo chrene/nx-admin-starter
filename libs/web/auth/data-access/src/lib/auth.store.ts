@@ -77,18 +77,35 @@ export class AuthStore {
       .pipe(
         switchMap(() => {
           const t = this.tokens$.value;
-          if (!t?.refreshToken) return of(null);
+          if (!t?.refreshToken) {
+            // No refresh token available, clear everything
+            this.logout$.next();
+            return of(null);
+          }
+
           return this.http
-            .post<Tokens>(`${this.base}/auth/refresh`, {
-              refreshToken: t.refreshToken,
-            })
+            .post<Tokens>(
+              `${this.base}/auth/refresh`,
+              {},
+              {
+                headers: { Authorization: `Bearer ${t.refreshToken}` },
+              }
+            )
             .pipe(
               tap((nt) => {
-                const merged = { ...t, ...nt };
-                storage.set(merged);
-                this.tokens$.next(merged);
+                if (nt) {
+                  storage.set(nt);
+                  this.tokens$.next(nt);
+                } else {
+                  console.warn('Refresh returned empty response');
+                }
               }),
-              catchError(() => of(null))
+              catchError((err) => {
+                console.error('Refresh failed:', err);
+                // Refresh failed, logout user
+                this.logout$.next();
+                return of(null);
+              })
             );
         })
       )

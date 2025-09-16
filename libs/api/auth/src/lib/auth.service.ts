@@ -17,14 +17,20 @@ export class ApiAuthService {
   signAccessToken(user: { id: string; role: Role }) {
     return this.jwt.sign(
       { sub: user.id, role: user.role },
-      { secret: process.env['JWT_SECRET'], expiresIn: '15m' }
+      {
+        secret: process.env['JWT_SECRET'],
+        expiresIn: process.env['JWT_EXPIRATION_TIME'],
+      }
     );
   }
 
   signRefreshToken(user: { id: string; role: Role }) {
     return this.jwt.sign(
       { sub: user.id, role: user.role },
-      { secret: process.env['JWT_REFRESH_SECRET'], expiresIn: '7d' }
+      {
+        secret: process.env['JWT_REFRESH_SECRET'],
+        expiresIn: process.env['JWT_REFRESH_EXPIRATION_TIME'],
+      }
     );
   }
 
