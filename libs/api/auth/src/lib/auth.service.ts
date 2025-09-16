@@ -27,4 +27,19 @@ export class ApiAuthService {
       { secret: process.env['JWT_REFRESH_SECRET'], expiresIn: '7d' }
     );
   }
+
+  async refreshTokens(userId: string) {
+    const user = await this.prisma.user.findUnique({ 
+      where: { id: userId } 
+    });
+    
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    return {
+      accessToken: this.signAccessToken({ id: user.id, role: user.role }),
+      refreshToken: this.signRefreshToken({ id: user.id, role: user.role }),
+    };
+  }
 }

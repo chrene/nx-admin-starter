@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiAuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { JwtAccessGuard } from './guards/jwt-access.guard';
+import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 import { User } from './decorators/user.decorator';
 import { Roles } from './decorators/roles.decorator';
 import { Role } from '@prisma/client';
@@ -17,6 +18,12 @@ export class ApiAuthController {
       accessToken: this.auth.signAccessToken({ id: u.id, role: u.role }),
       refreshToken: this.auth.signRefreshToken({ id: u.id, role: u.role }),
     };
+  }
+
+  @UseGuards(JwtRefreshGuard)
+  @Post('refresh')
+  async refresh(@User() user: { sub: string; role: Role }) {
+    return this.auth.refreshTokens(user.sub);
   }
 
   @UseGuards(JwtAccessGuard)
